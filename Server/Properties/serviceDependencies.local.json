@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "postgresql1": {
+      "containerPorts": "5432:5432",
+      "secretStore": "LocalSecretsFile",
+      "containerName": "notespostgres",
+      "containerImage": "postgres",
+      "type": "postgresql.container",
+      "connectionId": "LocalConnectionString"
+    },
+    "mssql1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.ServiceLinker/locations/westeurope/connectors/RemoteDbConnectionString_96BCC92080",
+      "secretStore": "LocalSecretsFile",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/notesdbserver1/databases/Notes_db",
+      "type": "mssql.azure",
+      "connectionId": "RemoteDbConnectionString"
+    }
+  }
+}

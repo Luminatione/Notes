@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "postgresql1": {
+      "type": "postgresql",
+      "connectionId": "LocalConnectionString"
+    },
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "RemoteDbConnectionString"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<Common.Model.Note>
+
+@{
+    ViewBag.Title = "Note List";
+}
+
+<h2>Note List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            @Html.DisplayNameFor(m => m.Id)
+            @Html.DisplayNameFor(m => m.Title)
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var note in (IEnumerable<Common.Model.Note>)ViewBag.Notes)
+        {
+            <tr>
+                <td>@Html.DisplayFor(m => note.Id)</td>
+                <td>@Html.DisplayFor(m => note.Title)</td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = note.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

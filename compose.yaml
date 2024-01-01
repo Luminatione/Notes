@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  notespostgres:
+    image: postgres
+    hostname: postgreshost
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - /var/lib/postgresql/data
+    networks:
+      - default
+    ports:
+      - "5432:5432"
+    restart: always
+
+  server:
+    build: .
+    depends_on: 
+      - notespostgres
+    hostname: da9d7567ca4c
+    user: app
+    environment:
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - APP_UID=1654
+      - ASPNETCORE_HTTP_PORTS=8080
+      - DOTNET_RUNNING_IN_CONTAINER=true
+      - DOTNET_VERSION=8.0.0
+      - ASPNET_VERSION=8.0.0
+    working_dir: /app
+    ports:
+      - "80:8080"
+    networks:
+      - default
+    restart: no
+    runtime: runc
+
+networks:
+  default:
+    external: false

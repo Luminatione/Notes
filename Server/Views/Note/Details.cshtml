@@ -1,0 +1,83 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Common.Model.Note
+
+@{
+    ViewData["Title"] = "Note Details";
+}
+
+<h2>Note Details</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+        <dd class="col-sm-10" id="text">
+            @Html.Raw(Model.Text)
+        </dd>
+
+        @if (Model.IsEncrypted)
+        {
+            <dd>
+                <button id="decryptButton" class="btn btn-primary">Decrypt Note</button>
+            </dd>
+        }
+        <!-- Add other properties as needed -->
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsEncrypted)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsEncrypted)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Owner)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Owner.Username) <!-- Assuming User has a UserName property -->
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsPublic)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsPublic)
+        </dd>
+
+        <dt class="col-sm-2">
+            Users with Access
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var user in Model.UsersWithAccess)
+            {
+                <p>@user.Username</p> <!-- Assuming User has a UserName property -->
+            }
+        </dd>
+    </dl>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+
+<script>
+    document.getElementById('decryptButton').addEventListener('click', function () {
+        var password = prompt('Enter the password:');
+        if (password) {
+            fetch('/Note/Decrypt/@Model.Id?password=' + encodeURIComponent(password))
+                .then(response => response.text())
+                .then(decryptedText => {
+                    document.getElementById('text').innerHTML = decryptedText;
+                })
+                .catch(error => {
+                    console.error('Error during decryption:', error);
+                });
+        }
+    });
+</script>
+

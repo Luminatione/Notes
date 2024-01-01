@@ -1,0 +1,21 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Server.DTO
+@model LoginDto
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+<form method="post" asp-action="Login" asp-controller="Auth">
+    @Html.AntiForgeryToken()
+
+    <div>
+        <label asp-for="Username"></label>
+        <input asp-for="Username" />
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" />
+    </div>
+
+    <div>
+        <button type="submit">Login</button>
+    </div>
+</form>

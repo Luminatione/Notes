@@ -1,0 +1,38 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Common.DTO.NoteDto
+
+
+<h2>Create Note</h2>
+
+<form method="post" asp-action="Create" asp-controller="Note">
+    <div class="form-group">
+        @Html.DisplayNameFor(e => e.Title)
+        @Html.EditorFor(e => e.Title)
+        @Html.ValidationMessageFor(e => e.Title)
+
+        @Html.DisplayNameFor(e => e.Text)
+        @Html.EditorFor(e => e.Text)
+        @Html.ValidationMessageFor(e => e.Text)
+
+        @Html.DisplayNameFor(e => e.IsPublic)
+        @Html.CheckBoxFor(e => e.IsPublic)
+        @Html.ValidationMessageFor(e => e.IsPublic)
+
+        @Html.DisplayNameFor(e => e.UsersWithAccess)
+        @Html.EditorFor(e => e.UsersWithAccess)
+        @Html.ValidationMessageFor(e => e.UsersWithAccess)
+
+        @Html.DisplayNameFor(e => e.IsEncrypted)
+        @Html.CheckBoxFor(e => e.IsEncrypted)
+        @Html.ValidationMessageFor(e => e.IsEncrypted)
+
+        @Html.DisplayNameFor(e => e.Password)
+        @Html.PasswordFor(e => e.Password)
+        @Html.ValidationMessageFor(e => e.Password)      
+    </div>
+
+    <!-- Add more form fields as needed -->
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
