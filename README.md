@@ -1,14 +1,14 @@
 # Notes
 ## Uruchamianie
-Polecenie `docker-compose up`\
+Polecenie `docker-compose up`
 ## Podstrony
 ### Logowanie
 /auth/register - rejestracja\
-/auth/login - logowanie\
+/auth/login - logowanie
 ### Notatki
 /note/create - tworzenie notatek\
 /note/index - lista notatek\
-/note/details/{id} - szczegóły notatki\
+/note/details/{id} - szczegóły notatki
 ## Funkcjonalności
 ### Logowanie
 Aplikacja pozwala na tworzenie nowych użytkowników i na logowanie się istniejących. Podczas rejestracji aplikacja wyświetla siłę hasła (na podstawie zawierania małych i wielkich liter, cyfr i znaków specjalnych), wymaga powtórzenia go i pozwala je podjerzeć.
