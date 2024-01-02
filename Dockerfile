@@ -17,6 +17,7 @@ WORKDIR "/src/Server"
 RUN dotnet build "./Server.csproj" -c $BUILD_CONFIGURATION -o /app/build
 RUN dotnet tool restore
 RUN dotnet ef migrations add Init
+
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./Server.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
@@ -24,4 +25,5 @@ RUN dotnet publish "./Server.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY --from=build /src/aspapp.pfx .
 ENTRYPOINT ["dotnet", "Server.dll"]

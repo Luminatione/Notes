@@ -13,9 +13,9 @@ builder.Services.AddRazorPages();
 
 builder.Host.UseContentRoot(Directory.GetCurrentDirectory());
 
-var connectionString = builder.Configuration.GetSection("RemoteDbConnectionString").Value;
+var connectionString = builder.Configuration.GetSection("LocalConnectionString").Value;
 
-builder.Services.AddDbContext<DataBaseContext>(e => e.UseSqlServer(connectionString));
+builder.Services.AddDbContext<DataBaseContext>(e => e.UseNpgsql(connectionString));
 
 builder.Services.AddScoped<INoteService, NoteService>();
 builder.Services.AddScoped<IAuthService, AuthService>();

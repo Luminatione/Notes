@@ -24,12 +24,17 @@ services:
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       - APP_UID=1654
       - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORT=443
       - DOTNET_RUNNING_IN_CONTAINER=true
       - DOTNET_VERSION=8.0.0
       - ASPNET_VERSION=8.0.0
+      - ASPNETCORE_URLS=https://+
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=qwerty
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=aspapp.pfx
     working_dir: /app
     ports:
       - "80:8080"
+      - "443:443"
     networks:
       - default
     restart: no
